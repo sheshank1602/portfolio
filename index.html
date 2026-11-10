@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#05070f">
+    <meta name="description" content="Ilaveni Sheshank - Automation & Manual Testing Engineer (Python, Robot Framework, Selenium, Pytest, API & JWT testing).">
+    <title>Ilaveni Sheshank | QA Automation & Testing Specialist</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+
+    <style>
+        html { -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            color: #f8fafc;
+            margin: 0;
+            min-height: 100vh;
+            min-height: 100dvh;
+            overflow-x: hidden;
+            width: 100%;
+            background: #05070f;
+        }
+        /* Single fixed gradient layer (cheap on mobile, still looks good if WebGL fails) */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(900px 600px at 85% 8%, rgba(34,211,238,.14), transparent 60%),
+                radial-gradient(800px 600px at 5% 45%, rgba(168,85,247,.13), transparent 60%),
+                radial-gradient(900px 700px at 80% 90%, rgba(59,130,246,.12), transparent 60%);
+        }
+        img, svg, canvas { max-width: 100%; }
+        .mono { font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace; }
+
+        /* Solid-ish backgrounds by default (safe on phones). Blur only on big desktop screens. */
+        .glass-panel {
+            background: rgba(10, 15, 30, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-card {
+            background: linear-gradient(145deg, rgba(30,41,59,.9), rgba(15,23,42,.88));
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            transition: border-color .3s ease, box-shadow .3s ease;
+        }
+        @media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
+            .glass-panel {
+                background: rgba(10, 15, 30, 0.78);
+                -webkit-backdrop-filter: blur(18px);
+                backdrop-filter: blur(18px);
+            }
+            .glass-card {
+                background: linear-gradient(145deg, rgba(30,41,59,.62), rgba(15,23,42,.45));
+                -webkit-backdrop-filter: blur(14px);
+                backdrop-filter: blur(14px);
+            }
+        }
+        .glass-card:hover {
+            border-color: rgba(34, 211, 238, 0.55);
+            box-shadow: 0 0 35px rgba(34, 211, 238, 0.18), 0 20px 50px -20px rgba(0,0,0,.7);
+        }
+        #webgl-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Scroll progress */
+        #progress {
+            position: fixed; top: 0; left: 0; height: 3px; width: 0;
+            background: linear-gradient(90deg, #22d3ee, #3b82f6, #a855f7);
+            z-index: 60; box-shadow: 0 0 12px rgba(34,211,238,.8);
+        }
+
+        /* Reveal */
+        /* Fade-in only on big desktop screens. On phones everything is always visible. */
+        @media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
+            .js .reveal { opacity: 0; transition: opacity .7s ease; }
+            .js .reveal.visible { opacity: 1; }
+        }
+
+        /* Tilt (JS applies transform on mouse devices only) */
+        .tilt { transform-origin: center; }
+
+        /* Floating hero card (desktop only) */
+        @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+        @media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
+            .floaty { animation: floaty 6s ease-in-out infinite; }
+        }
+
+        /* Animated gradient text */
+        @keyframes shine { to { background-position: 200% center; } }
+        .grad-text {
+            background: linear-gradient(90deg, #22d3ee, #60a5fa, #a855f7, #22d3ee);
+            background-size: 200% auto;
+            -webkit-background-clip: text; background-clip: text;
+            color: transparent; -webkit-text-fill-color: transparent;
+        }
+        @media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
+            .grad-text { animation: shine 6s linear infinite; }
+        }
+
+        /* Typing caret */
+        .caret { display:inline-block; width:2px; height:1.1em; background:#22d3ee; margin-left:3px; vertical-align:-0.15em; animation: blink 1s steps(1) infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .tag { display:inline-block; padding:2px 10px; border-radius:9999px; font-size:11px; font-weight:600;
+               background:rgba(6,182,212,.12); color:#22d3ee; border:1px solid rgba(6,182,212,.3); }
+
+        .nav-link.active { color: #22d3ee; }
+
+        /* CSS-only 3D cube: shown automatically only when WebGL is unavailable */
+        .cube-wrap { display: none; height: 190px; align-items: center; justify-content: center; perspective: 700px; margin-bottom: 14px; }
+        .no-webgl .cube-wrap { display: flex; }
+        .cube { position: relative; width: 90px; height: 90px; transform-style: preserve-3d; animation: spin3d 14s linear infinite; }
+        .cube .face { position: absolute; inset: 0; border: 1.5px solid rgba(34,211,238,.85); background: rgba(34,211,238,.07); box-shadow: inset 0 0 18px rgba(34,211,238,.35); }
+        .cube .f1 { transform: translateZ(45px); }
+        .cube .f2 { transform: rotateY(180deg) translateZ(45px); }
+        .cube .f3 { transform: rotateY(90deg) translateZ(45px); }
+        .cube .f4 { transform: rotateY(-90deg) translateZ(45px); }
+        .cube .f5 { transform: rotateX(90deg) translateZ(45px); }
+        .cube .f6 { transform: rotateX(-90deg) translateZ(45px); }
+        .cube .ring { position: absolute; left: -35px; top: -35px; width: 160px; height: 160px; border-radius: 50%; border: 1.5px solid rgba(168,85,247,.75); }
+        .cube .r1 { transform: rotateX(72deg); }
+        .cube .r2 { transform: rotateY(72deg); border-color: rgba(96,165,250,.75); }
+        @keyframes spin3d { from { transform: rotateX(-22deg) rotateY(0deg); } to { transform: rotateX(-22deg) rotateY(360deg); } }
+        @media (prefers-reduced-motion: reduce) { .cube { animation: none; transform: rotateX(-22deg) rotateY(30deg); } }
+        a, button { -webkit-tap-highlight-color: transparent; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .js .reveal { opacity: 1; transform: none; transition: none; }
+            .floaty, .grad-text, .caret { animation: none; }
+            html { scroll-behavior: auto !important; }
+        }
+    </style>
+    <script>document.documentElement.classList.add('js');</script>
+</head>
+<body class="relative text-slate-100 antialiased">
+
+    <div id="progress"></div>
+    <canvas id="webgl-canvas" aria-hidden="true"></canvas>
+
+    <!-- Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 px-3 py-3 sm:px-8">
+        <nav class="max-w-7xl mx-auto glass-panel rounded-2xl px-4 sm:px-6 py-3 flex justify-between items-center shadow-2xl" aria-label="Main">
+            <a href="#home" class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-cyan-500/30">IS</div>
+                <span class="font-bold text-base sm:text-lg tracking-wider text-white">SHESHANK<span class="text-cyan-400">.QA</span></span>
+            </a>
+
+            <div class="hidden md:flex items-center space-x-7 text-sm font-medium">
+                <a href="#home" class="nav-link hover:text-cyan-400 transition-colors">Home</a>
+                <a href="#about" class="nav-link hover:text-cyan-400 transition-colors">About</a>
+                <a href="#experience" class="nav-link hover:text-cyan-400 transition-colors">Experience</a>
+                <a href="#skills" class="nav-link hover:text-cyan-400 transition-colors">Skills</a>
+                <a href="#projects" class="nav-link hover:text-cyan-400 transition-colors">Projects</a>
+                <a href="#education" class="nav-link hover:text-cyan-400 transition-colors">Education</a>
+                <a href="#contact" class="nav-link hover:text-cyan-400 transition-colors">Contact</a>
+            </div>
+
+            <button id="mobile-menu-btn" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu"
+                    class="md:hidden text-slate-300 hover:text-cyan-400 focus:outline-none text-2xl w-10 h-10 flex items-center justify-center">
+                <i class="fa-solid fa-bars" id="menu-icon"></i>
+            </button>
+        </nav>
+
+        <div id="mobile-menu" class="hidden max-w-7xl mx-auto mt-2 glass-panel rounded-2xl p-6 flex-col space-y-4 text-center shadow-2xl">
+            <a href="#home" class="mobile-link text-slate-200 hover:text-cyan-400 py-1 block">Home</a>
+            <a href="#about" class="mobile-link text-slate-200 hover:text-cyan-400 py-1 block">About</a>
+            <a href="#experience" class="mobile-link text-slate-200 hover:text-cyan-400 py-1 block">Experience</a>
+            <a href="#skills" class="mobile-link text-slate-200 hover:text-cyan-400 py-1 block">Skills</a>
+            <a href="#projects" class="mobile-link text-slate-200 hover:text-cyan-400 py-1 block">Projects</a>
+            <a href="#education" class="mobile-link text-slate-200 hover:text-cyan-400 py-1 block">Education</a>
+            <a href="#contact" class="mobile-link text-slate-200 hover:text-cyan-400 py-1 block">Contact</a>
+        </div>
+    </header>
+
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-10 space-y-24">
+
+        <!-- Hero -->
+        <section id="home" class="min-h-[85vh] flex items-center justify-center py-8 scroll-mt-28">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center w-full">
+
+                <div class="lg:col-span-7 space-y-6 text-left min-w-0">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-cyan-400 text-xs sm:text-sm font-semibold tracking-wide">
+                        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                        AUTOMATION &amp; MANUAL QA TESTING SPECIALIST
+                    </div>
+
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.05]">
+                        Hi, I'm <span class="grad-text">Ilaveni Sheshank</span>
+                    </h1>
+
+                    <p class="mono text-base sm:text-xl text-slate-300">
+                        &gt; I specialize in <span id="typed" class="text-cyan-300">Selenium Automation</span><span class="caret"></span>
+                    </p>
+
+                    <p class="text-slate-300 text-base sm:text-lg max-w-2xl leading-relaxed">
+                        Software Testing Engineer with hands-on expertise in Python-based automation, Robot Framework, Selenium WebDriver, Pytest, REST API verification, and JWT security authentication.
+                    </p>
+
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <a href="mailto:isheshank@gmail.com" class="px-3.5 py-2 rounded-lg glass-card text-xs text-slate-300 flex items-center gap-2 hover:border-cyan-400 transition-colors break-all">
+                            <i class="fa-solid fa-envelope text-cyan-400"></i> isheshank@gmail.com
+                        </a>
+                        <a href="tel:+919052349111" class="px-3.5 py-2 rounded-lg glass-card text-xs text-slate-300 flex items-center gap-2 hover:border-cyan-400 transition-colors">
+                            <i class="fa-solid fa-phone text-blue-400"></i> +91 9052349111
+                        </a>
+                        <span class="px-3.5 py-2 rounded-lg glass-card text-xs text-slate-300 flex items-center gap-2">
+                            <i class="fa-solid fa-location-dot text-emerald-400"></i> Hyderabad, India
+                        </span>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-4 pt-4">
+                        <a href="#projects" class="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold text-sm transition-all shadow-lg shadow-cyan-500/25 hover:shadow-cyan-400/40 hover:-translate-y-0.5 flex items-center gap-2">
+                            <span>View Projects</span><i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                        <a href="#contact" class="px-6 py-3 rounded-xl glass-card hover:bg-slate-800/80 text-slate-200 font-semibold text-sm transition-all hover:-translate-y-0.5 flex items-center gap-2">
+                            <span>Contact Me</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 flex justify-center w-full min-w-0">
+                    <div class="floaty w-full max-w-sm">
+                        <div class="cube-wrap" aria-hidden="true">
+                            <div class="cube">
+                                <div class="face f1"></div><div class="face f2"></div><div class="face f3"></div>
+                                <div class="face f4"></div><div class="face f5"></div><div class="face f6"></div>
+                                <div class="ring r1"></div><div class="ring r2"></div>
+                            </div>
+                        </div>
+                        <div class="tilt glass-card rounded-3xl p-6 relative overflow-hidden shadow-2xl" style="border-color: rgba(34,211,238,.25);">
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center border-b border-slate-700/60 pb-3">
+                                    <span class="text-xs mono text-cyan-400 font-bold">TEST_SUITE_ENGINE</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-semibold">PASSED</span>
+                                </div>
+                                <div class="space-y-3 mono text-xs">
+                                    <div class="bg-slate-950/70 p-3 rounded-xl border border-slate-800 break-words">
+                                        <span class="text-slate-500">$</span> <span class="text-purple-400">test_cases</span> = <span class="text-amber-300">"200+ Executed"</span>
+                                    </div>
+                                    <div class="bg-slate-950/70 p-3 rounded-xl border border-slate-800 break-words">
+                                        <span class="text-slate-500">$</span> <span class="text-purple-400">frameworks</span> = [<span class="text-cyan-300">"Robot"</span>, <span class="text-cyan-300">"Selenium"</span>, <span class="text-cyan-300">"PyTest"</span>]
+                                    </div>
+                                    <div class="bg-slate-950/70 p-3 rounded-xl border border-slate-800 break-words">
+                                        <span class="text-slate-500">$</span> <span class="text-purple-400">education</span> = <span class="text-emerald-300">"MCA 7.8 CGPA (2025)"</span>
+                                    </div>
+                                </div>
+                                <div class="pt-1">
+                                    <div class="flex justify-between text-[10px] mono text-slate-400 mb-1"><span>suite_progress</span><span>100%</span></div>
+                                    <div class="h-1.5 rounded-full bg-slate-800 overflow-hidden"><div class="h-full w-full rounded-full bg-gradient-to-r from-cyan-400 to-emerald-400"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- About -->
+        <section id="about" class="py-10 scroll-mt-28 reveal">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-2">Career Profile</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white">About Me</p>
+                <div class="h-1 w-16 bg-gradient-to-r from-cyan-400 to-blue-600 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                <div class="tilt glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl mb-6">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-bold text-white mb-4">Career Objective</h3>
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-4">
+                            To seek a challenging position that provides continuous learning opportunities and allows me to contribute to the growth of the organization.
+                        </p>
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                            I have worked on Python-based automation to validate web applications and APIs using <strong>Pytest</strong> for UI and backend validation, and with <strong>Robot Framework</strong> and <strong>Selenium</strong>, focusing on improving test reliability, identifying issues early, and maintaining clean and reusable test suites.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mt-8 pt-6 border-t border-slate-700/60">
+                        <div>
+                            <span class="block text-3xl font-black text-cyan-400"><span class="count" data-to="200">200</span>+</span>
+                            <span class="text-xs text-slate-400">Test Cases Designed &amp; Executed</span>
+                        </div>
+                        <div>
+                            <span class="block text-xl sm:text-2xl font-black text-blue-400">MCA 7.8 CGPA</span>
+                            <span class="text-xs text-slate-400">Anurag University (2025)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tilt glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xl mb-6">
+                            <i class="fa-solid fa-vial-circle-check"></i>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-bold text-white mb-4">Core QA Capabilities</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <i class="fa-solid fa-circle-check text-cyan-400 mt-1"></i>
+                                <div>
+                 
