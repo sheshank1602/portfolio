@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ilaveni Sheshank | QA & Automation Specialist</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow-x: hidden;
+            background-color: #0b0f19;
+            color: #f3f4f6;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .glass-card {
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-card:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.2);
+        }
+    </style>
+</head>
+<body class="relative min-h-screen flex flex-col justify-between">
+
+    <!-- Three.js 3D Background Canvas -->
+    <div id="canvas-container"></div>
+
+    <!-- Header / Navigation -->
+    <header class="w-full py-5 px-6 md:px-12 flex justify-between items-center glass-card border-x-0 border-t-0 sticky top-0 z-50">
+        <div class="flex items-center space-x-3">
+            <div class="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></div>
+            <span class="font-bold text-lg tracking-wider text-white">IS.PORTFOLIO</span>
+        </div>
+        <nav class="hidden md:flex space-x-8 text-sm font-medium text-gray-300">
+            <a href="#about" class="hover:text-blue-400 transition">About</a>
+            <a href="#experience" class="hover:text-blue-400 transition">Experience</a>
+            <a href="#skills" class="hover:text-blue-400 transition">Tech Stack</a>
+            <a href="#contact" class="hover:text-blue-400 transition">Contact</a>
+        </nav>
+        <a href="#contact" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold px-4 py-2 rounded-full transition shadow-lg shadow-blue-500/30">
+            Get in Touch
+        </a>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-5xl mx-auto px-6 py-12 space-y-20 z-10 w-full">
+
+        <!-- Hero Section -->
+        <section class="text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-10 py-10">
+            <div class="space-y-6 max-w-2xl">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-medium">
+                    <span>QA Automation Specialist</span>
+                    <span>•</span>
+                    <span>Hyderabad, India</span>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                    Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">Ilaveni Sheshank</span>
+                </h1>
+                <p class="text-gray-300 text-base md:text-lg leading-relaxed">
+                    Detail-oriented QA Automation Engineer specializing in UI/API automation, robust backend testing, and scalable quality workflows. Crafting flawless software reliability from Shamirpet, Hyderabad.
+                </p>
+                <div class="flex flex-wrap gap-4 justify-center md:justify-start pt-2">
+                    <a href="#experience" class="bg-blue-600 hover:bg-blue-500 text-white font-medium px-6 py-3 rounded-xl transition text-sm shadow-lg shadow-blue-600/30">
+                        Explore Experience
+                    </a>
+                    <a href="#contact" class="glass-card hover:bg-gray-800 text-white font-medium px-6 py-3 rounded-xl transition text-sm">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Stats Card -->
+            <div class="glass-card p-8 rounded-3xl w-full md:w-80 space-y-6 shadow-2xl border border-gray-800">
+                <div class="text-xs font-semibold text-gray-400 uppercase tracking-widest">At a Glance</div>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center py-2 border-b border-gray-800">
+                        <span class="text-gray-400 text-sm">Experience</span>
+                        <span class="font-bold text-white text-sm">QA Engineer</span>
+                    </div>
+                    <div class="flex justify-between items-center py-2 border-b border-gray-800">
+                        <span class="text-gray-400 text-sm">MCA Graduation</span>
+                        <span class="font-bold text-blue-400 text-sm py-2 px-1">7.8 CGPA</span>
+                    </div>
+                    <div class="flex justify-between items-center py-2">
+                        <span class="text-gray-400 text-sm">Location</span>
+                        <span class="font-bold text-white text-sm">Hyderabad</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience & Projects Section -->
+        <section id="experience" class="space-y-8">
+            <div class="border-b border-gray-800 pb-4">
+                <h2 class="text-2xl font-bold text-white flex items-center space-x-3">
+                    <span class="w-2 h-6 bg-blue-500 rounded-full"></span>
+                    <span>Professional Experience & Projects</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Current Role -->
+                <div class="glass-card p-6 rounded-2xl space-y-4 transition duration-300">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-bold text-lg text-white">Desktop Support Engineer</h3>
+                            <p class="text-blue-400 text-xs font-medium">Akshara Enterprises • HMWSSB Division 13</p>
+                        </div>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Current</span>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        Managing technical infrastructure, troubleshooting system issues, and ensuring seamless IT operations for water supply and sewerage board divisions in Sainikpuri, Hyderabad.
+                    </p>
+                </div>
+
+                <!-- Internship Project -->
+                <div class="glass-card p-6 rounded-2xl space-y-4 transition duration-300">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-bold text-lg text-white">Software Testing Intern</h3>
+                            <p class="text-blue-400 text-xs font-medium">IVTREE Technologies • Uniclar Project</p>
+                        </div>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">Dec 2025 - May 2026</span>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        Spearheaded UI automation using Robot Framework & Selenium, performed robust API testing with PyTest, and executed backend validation & JWT authentication testing on the Uniclar platform.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack Section -->
+        <section id="skills" class="space-y-8">
+            <div class="border-b border-gray-800 pb-4">
+                <h2 class="text-2xl font-bold text-white flex items-center space-x-3">
+                    <span class="w-2 h-6 bg-blue-500 rounded-full"></span>
+                    <span>Core Technical Stack</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="glass-card p-5 rounded-xl text-center space-y-2">
+                    <div class="text-blue-400 font-bold text-sm">Automation</div>
+                    <div class="text-gray-300 text-xs">Robot Framework, Selenium, PyTest</div>
+                </div>
+                <div class="glass-card p-5 rounded-xl text-center space-y-2">
+                    <div class="text-blue-400 font-bold text-sm">Languages & Backend</div>
+                    <div class="text-gray-300 text-xs">Python, Flask, JavaScript</div>
+                </div>
+                <div class="glass-card p-5 rounded-xl text-center space-y-2">
+                    <div class="text-blue-400 font-bold text-sm">Testing & Security</div>
+                    <div class="text-gray-300 text-xs">API Testing, JWT Auth, Manual QA</div>
+                </div>
+                <div class="glass-card p-5 rounded-xl text-center space-y-2">
+                    <div class="text-blue-400 font-bold text-sm">Tools & Stack</div>
+                    <div class="text-gray-300 text-xs">Git, GitHub Pages, Tailwind CSS</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="space-y-8 pb-10">
+            <div class="border-b border-gray-800 pb-4">
+                <h2 class="text-2xl font-bold text-white flex items-center space-x-3">
+                    <span class="w-2 h-6 bg-blue-500 rounded-full"></span>
+                    <span>Get In Touch</span>
+                </h2>
+            </div>
+            <div class="glass-card p-8 rounded-2xl text-center max-w-xl mx-auto space-y-4">
+                <p class="text-gray-300 text-sm">
+                    Open to opportunities in QA Automation, software testing, and robust engineering roles. Let's connect!
+                </p>
+                <div class="pt-2">
+                    <a href="mailto:sheshank@example.com" class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-medium px-8 py-3 rounded-xl transition text-sm shadow-lg shadow-blue-600/30">
+                        Send an Email
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-6 px-6 text-center text-xs text-gray-500 glass-card border-x-0 border-b-0 z-10">
+        © 2026 Ilaveni Sheshank. Built with human care, Three.js, and Tailwind CSS.
+    </footer>
+
+    <!-- Three.js 3D Particle Grid Animation Script -->
+    <script>
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        // Create subtle 3D particle nodes for a sleek professional tech aesthetic
+        const particleCount = 700;
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+
+        for (let i = 0; i < particleCount * 3; i += 3) {
+            positions[i] = (Math.random() - 0.5) * 30;
+            positions[i + 1] = (Math.random() - 0.5) * 30;
+            positions[i + 2] = (Math.random() - 0.5) * 30;
+        }
+
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+        const material = new THREE.PointsMaterial({
+            size: 0.05,
+            color: 0x3b82f6,
+            transparent: true,
+            opacity: 0.6,
+        });
+
+        const particles = new THREE.Points(geometry, material);
+        scene.add(particles);
+
+        camera.position.z = 10;
+
+        // Mouse movement interaction
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetX = 0;
+        let targetY = 0;
+
+        window.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX - window.innerWidth / 2) * 0.0005;
+            mouseY = (event.clientY - window.innerHeight / 2) * 0.0005;
+        });
+
+        // Animation loop
+        const clock = new THREE.Clock();
+        function animate() {
+            requestAnimationFrame(animate);
+            const elapsedTime = clock.getElapsedTime();
+
+            targetX += (mouseX - targetX) * 0.05;
+            targetY += (mouseY - targetY) * 0.05;
+
+            particles.rotation.y = elapsedTime * 0.05 + targetX;
+            particles.rotation.x = elapsedTime * 0.03 + targetY;
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Responsive window resizing
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
