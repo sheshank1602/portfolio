@@ -1,777 +1,263 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#05070f" />
-    <meta
-      name="description"
-      content="Ilaveni Sheshank - Automation & Manual Testing Engineer (Python, Robot Framework, Selenium, Pytest, API & JWT testing)."
-    />
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
-    <title>Ilaveni Sheshank | QA Automation & Testing Specialist</title>
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
-
-    <style>
-      html { -webkit-text-size-adjust: 100%; }
-      body {
-        font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-        color: #f8fafc;
-        margin: 0;
-        min-height: 100vh;
-        min-height: 100dvh;
-        overflow-x: hidden;
-        width: 100%;
-        background: #05070f;
-      }
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        z-index: 0;
-        pointer-events: none;
-        background:
-          radial-gradient(900px 600px at 85% 8%, rgba(34,211,238,.18), transparent 60%),
-          radial-gradient(800px 600px at 5% 45%, rgba(168,85,247,.16), transparent 60%),
-          radial-gradient(900px 700px at 80% 90%, rgba(59,130,246,.14), transparent 60%);
-      }
-      body::after {
-        content: "";
-        position: fixed;
-        inset: 0;
-        z-index: 0;
-        pointer-events: none;
-        background-image:
-          linear-gradient(rgba(148,163,184,0.05) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(148,163,184,0.05) 1px, transparent 1px);
-        background-size: 28px 28px;
-        mask-image: radial-gradient(circle at center, black 45%, transparent 100%);
-      }
-      img, svg, canvas { max-width: 100%; }
-      .mono { font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace; }
-
-      .glass-panel {
-        background: rgba(10, 15, 30, 0.82);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 18px 48px rgba(15, 23, 42, 0.62), inset 0 1px 0 rgba(255,255,255,0.06);
-      }
-      .glass-card {
-        position: relative;
-        overflow: hidden;
-        background: linear-gradient(145deg, rgba(22,29,44,.92), rgba(15,23,42,.88));
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 0 22px 52px rgba(2,6,23,0.45), inset 0 1px 0 rgba(255,255,255,0.05);
-        transform-style: preserve-3d;
-        transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
-      }
-      .glass-card::before {
-        content: "";
-        position: absolute;
-        inset: -1px;
-        background: linear-gradient(120deg, rgba(34,211,238,.18), transparent 32%, transparent 68%, rgba(168,85,247,.18));
-        opacity: 0;
-        transition: opacity .35s ease;
-        pointer-events: none;
-      }
-      @media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
-        .glass-panel {
-          background: rgba(10, 15, 30, 0.72);
-          -webkit-backdrop-filter: blur(18px);
-          backdrop-filter: blur(18px);
-        }
-        .glass-card {
-          background: linear-gradient(145deg, rgba(20,30,42,.68), rgba(15,23,42,.52));
-          -webkit-backdrop-filter: blur(16px);
-          backdrop-filter: blur(16px);
-        }
-      }
-      .glass-card:hover {
-        border-color: rgba(34, 211, 238, 0.55);
-        box-shadow: 0 0 35px rgba(34, 211, 238, 0.18), 0 28px 65px -25px rgba(0,0,0,.88);
-      }
-      .glass-card:hover::before {
-        opacity: 1;
-      }
-      #webgl-canvas {
-        position: fixed;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 0;
-        pointer-events: none;
-      }
-
-      #progress {
-        position: fixed; top: 0; left: 0; height: 3px; width: 0;
-        background: linear-gradient(90deg, #22d3ee, #3b82f6, #a855f7);
-        z-index: 60; box-shadow: 0 0 12px rgba(34,211,238,.8);
-      }
-
-      @media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
-        .js .reveal { opacity: 0; transition: opacity .7s ease; }
-        .js .reveal.visible { opacity: 1; }
-      }
-
-      .tilt { transform-origin: center; }
-
-      @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-      @keyframes drift { 0%,100% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(12px,-18px,0) scale(1.08); } }
-      @keyframes pulseGlow { 0%,100% { box-shadow: 0 0 0 rgba(34,211,238,0), 0 0 0 rgba(168,85,247,0); } 50% { box-shadow: 0 0 30px rgba(34,211,238,.28), 0 0 40px rgba(168,85,247,.18); } }
-      @media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
-        .floaty { animation: floaty 6s ease-in-out infinite; }
-        .orb-one, .orb-two { animation: drift 10s ease-in-out infinite; }
-        .hero-panel { animation: pulseGlow 6s ease-in-out infinite; }
-      }
-
-      @keyframes shine { to { background-position: 200% center; } }
-      .grad-text {
-        background: linear-gradient(90deg, #22d3ee, #60a5fa, #a855f7, #22d3ee);
-        background-size: 200% auto;
-        -webkit-background-clip: text; background-clip: text;
-        color: transparent; -webkit-text-fill-color: transparent;
-      }
-      @media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
-        .grad-text { animation: shine 6s linear infinite; }
-      }
-
-      .caret { display:inline-block; width:2px; height:1.1em; background:#22d3ee; margin-left:3px; vertical-align:-0.15em; animation: blink 1s steps(1) infinite; }
-      @keyframes blink { 50% { opacity: 0; } }
-
-      .tag { display:inline-block; padding:2px 10px; border-radius:9999px; font-size:11px; font-weight:600;
-        background:rgba(6,182,212,.12); color:#22d3ee; border:1px solid rgba(6,182,212,.3); }
-
-      .nav-link.active { color: #22d3ee; text-shadow: 0 0 18px rgba(34,211,238,.7); }
-      .nav-link {
-        position: relative;
-      }
-      .nav-link::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: -8px;
-        height: 2px;
-        border-radius: 9999px;
-        background: linear-gradient(90deg, rgba(34,211,238,0.8), rgba(168,85,247,0.8));
-        transform: scaleX(0);
-        transform-origin: center;
-        transition: transform .25s ease;
-      }
-      .nav-link:hover::after, .nav-link.active::after {
-        transform: scaleX(1);
-      }
-
-      .cube-wrap { display: none; height: 190px; align-items: center; justify-content: center; perspective: 700px; margin-bottom: 14px; }
-      .no-webgl .cube-wrap { display: flex; }
-      .cube { position: relative; width: 90px; height: 90px; transform-style: preserve-3d; animation: spin3d 14s linear infinite; }
-      .cube .face { position: absolute; inset: 0; border: 1.5px solid rgba(34,211,238,.85); background: rgba(34,211,238,.07); box-shadow: inset 0 0 18px rgba(34,211,238,.35); }
-      .cube .f1 { transform: translateZ(45px); }
-      .cube .f2 { transform: rotateY(180deg) translateZ(45px); }
-      .cube .f3 { transform: rotateY(90deg) translateZ(45px); }
-      .cube .f4 { transform: rotateY(-90deg) translateZ(45px); }
-      .cube .f5 { transform: rotateX(90deg) translateZ(45px); }
-      .cube .f6 { transform: rotateX(-90deg) translateZ(45px); }
-      .cube .ring { position: absolute; left: -35px; top: -35px; width: 160px; height: 160px; border-radius: 50%; border: 1.5px solid rgba(168,85,247,.75); }
-      .cube .r1 { transform: rotateX(72deg); }
-      .cube .r2 { transform: rotateY(72deg); border-color: rgba(96,165,250,.75); }
-      @keyframes spin3d { from { transform: rotateX(-22deg) rotateY(0deg); } to { transform: rotateX(-22deg) rotateY(360deg); } }
-      @media (prefers-reduced-motion: reduce) { .cube { animation: none; transform: rotateX(-22deg) rotateY(30deg); } }
-      a, button { -webkit-tap-highlight-color: transparent; }
-
-      @media (prefers-reduced-motion: reduce) {
-        .js .reveal { opacity: 1; transform: none; transition: none; }
-        .floaty, .grad-text, .caret { animation: none; }
-        html { scroll-behavior: auto !important; }
-      }
-    </style>
-    <script>document.documentElement.classList.add('js');</script>
-  </head>
-  <body class="relative text-slate-100 antialiased">
-    <div id="progress"></div>
-    <canvas id="webgl-canvas" aria-hidden="true"></canvas>
-    <div class="orb-one pointer-events-none absolute left-[8%] top-[20%] hidden md:block w-64 h-64 rounded-full bg-cyan-500/10 blur-3xl"></div>
-    <div class="orb-two pointer-events-none absolute right-[10%] top-[32%] hidden md:block w-72 h-72 rounded-full bg-violet-500/10 blur-3xl"></div>
-
-    <header class="fixed top-0 left-0 right-0 z-50 px-3 py-3 sm:px-8">
-      <nav class="max-w-7xl mx-auto glass-panel rounded-2xl px-4 sm:px-6 py-3 flex justify-between items-center shadow-2xl" aria-label="Main">
-        <a href="#home" class="flex items-center space-x-3">
-          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-cyan-500/30">IS</div>
-          <span class="font-bold text-base sm:text-lg tracking-wider text-white">SHESHANK<span class="text-cyan-400">.QA</span></span>
-        </a>
-
-        <div class="hidden md:flex items-center space-x-7 text-sm font-medium">
-          <a href="#home" class="nav-link hover:text-cyan-400 transition-colors">Home</a>
-          <a href="#about" class="nav-link hover:text-cyan-400 transition-colors">About</a>
-          <a href="#experience" class="nav-link hover:text-cyan-400 transition-colors">Experience</a>
-          <a href="#skills" class="nav-link hover:text-cyan-400 transition-colors">Skills</a>
-          <a href="#projects" class="nav-link hover:text-cyan-400 transition-colors">Projects</a>
-          <a href="#education" class="nav-link hover:text-cyan-400 transition-colors">Education</a>
-          <a href="#contact" class="nav-link hover:text-cyan-400 transition-colors">Contact</a>
-        </div>
-
-        <button id="mobile-menu-btn" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu"
-                class="md:hidden text-slate-300 hover:text-cyan-400 focus:outline-none text-2xl w-10 h-10 flex items-center justify-center">
-          <i class="fa-solid fa-bars" id="menu-icon"></i>
-        </button>
-      </nav>
-
-      <div id="mobile-menu" class="hidden max-w-7xl mx-auto mt-2 glass-panel rounded-2xl p-6 flex-col space-y-4 text-center shadow-2xl">
-        <a href="#home" class="mobile-link text-slate-200 hover:text-cyan-400 py-1 block">Home</a>
-        <a href="#about" class="mobile-link text-slate-200 hover:text-cyan-400 py-1 block">About</a>
-        <a href="#experience" class="mobile-link text-slate-200 hover:text-cyan-400 py-1 block">Experience</a>
-        <a href="#skills" class="mobile-link text-slate-200 hover:text-cyan-400 py-1 block">Skills</a>
-        <a href="#projects" class="mobile-link text-slate-200 hover:text-cyan-400 py-1 block">Projects</a>
-        <a href="#education" class="mobile-link text-slate-200 hover:text-cyan-400 py-1 block">Education</a>
-        <a href="#contact" class="mobile-link text-slate-200 hover:text-cyan-400 py-1 block">Contact</a>
-      </div>
-    </header>
-
-    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-10 space-y-24">
-      <section id="home" class="min-h-[85vh] flex items-center justify-center py-8 scroll-mt-28">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center w-full">
-          <div class="lg:col-span-7 space-y-6 text-left min-w-0">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-cyan-400 text-xs sm:text-sm font-semibold tracking-wide">
-              <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-              AUTOMATION &amp; MANUAL TESTING INTERN
-            </div>
-
-            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.05]">
-              Hi, I'm <span class="grad-text">Ilaveni Sheshank</span>
-            </h1>
-
-            <p class="mono text-base sm:text-xl text-slate-300">
-              &gt; I specialize in <span id="typed" class="text-cyan-300">Selenium Automation</span><span class="caret"></span>
-            </p>
-
-            <p class="text-slate-300 text-base sm:text-lg max-w-2xl leading-relaxed">
-              Automation and Manual Testing Intern with hands-on experience in functional testing, regression validation, defect tracking, test case execution, and live QA workflow support. During the internship, I executed 200+ test cases covering smoke, regression, and functional validation.
-            </p>
-
-            <div class="flex flex-wrap gap-3 pt-2">
-              <a href="mailto:isheshank@gmail.com" class="px-3.5 py-2 rounded-lg glass-card text-xs text-slate-300 flex items-center gap-2 hover:border-cyan-400 transition-colors break-all">
-                <i class="fa-solid fa-envelope text-cyan-400"></i> isheshank@gmail.com
-              </a>
-              <a href="tel:+919052349111" class="px-3.5 py-2 rounded-lg glass-card text-xs text-slate-300 flex items-center gap-2 hover:border-cyan-400 transition-colors">
-                <i class="fa-solid fa-phone text-blue-400"></i> +91 9052349111
-              </a>
-              <span class="px-3.5 py-2 rounded-lg glass-card text-xs text-slate-300 flex items-center gap-2">
-                <i class="fa-solid fa-location-dot text-emerald-400"></i> Hyderabad, India
-              </span>
-            </div>
-
-            <div class="flex flex-wrap items-center gap-4 pt-4">
-              <a href="#projects" class="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold text-sm transition-all shadow-lg shadow-cyan-500/25 hover:shadow-cyan-400/40 hover:-translate-y-0.5 flex items-center gap-2">
-                <span>View Projects</span><i class="fa-solid fa-arrow-right text-xs"></i>
-              </a>
-              <a href="#contact" class="px-6 py-3 rounded-xl glass-card hover:bg-slate-800/80 text-slate-200 font-semibold text-sm transition-all hover:-translate-y-0.5 flex items-center gap-2">
-                <span>Contact Me</span>
-              </a>
-            </div>
-          </div>
-
-          <div class="lg:col-span-5 flex justify-center w-full min-w-0">
-            <div class="floaty w-full max-w-sm">
-              <div class="cube-wrap" aria-hidden="true">
-                <div class="cube">
-                  <div class="face f1"></div><div class="face f2"></div><div class="face f3"></div>
-                  <div class="face f4"></div><div class="face f5"></div><div class="face f6"></div>
-                  <div class="ring r1"></div><div class="ring r2"></div>
-                </div>
-              </div>
-              <div class="tilt glass-card rounded-3xl p-6 relative overflow-hidden shadow-[0_30px_80px_rgba(14,116,144,0.22)] hero-panel" style="border-color: rgba(34,211,238,.25);">
-                <div class="space-y-4">
-                  <div class="flex justify-between items-center border-b border-slate-700/60 pb-3">
-                    <span class="text-xs mono text-cyan-400 font-bold">TEST_SUITE_ENGINE</span>
-                    <span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-semibold">PASSED</span>
-                  </div>
-                  <div class="space-y-3 mono text-xs">
-                    <div class="bg-slate-950/70 p-3 rounded-xl border border-slate-800 break-words">
-                      <span class="text-slate-500">$</span> <span class="text-purple-400">test_cases</span> = <span class="text-amber-300">"200+ Executed"</span>
-                    </div>
-                    <div class="bg-slate-950/70 p-3 rounded-xl border border-slate-800 break-words">
-                      <span class="text-slate-500">$</span> <span class="text-purple-400">frameworks</span> = [<span class="text-cyan-300">"Robot"</span>, <span class="text-cyan-300">"Selenium"</span>, <span class="text-cyan-300">"PyTest"</span>]
-                    </div>
-                    <div class="bg-slate-950/70 p-3 rounded-xl border border-slate-800 break-words">
-                      <span class="text-slate-500">$</span> <span class="text-purple-400">education</span> = <span class="text-emerald-300">"MCA - 7.8 CGPA (2025)"</span>
-                    </div>
-                  </div>
-                  <div class="pt-1">
-                    <div class="flex justify-between text-[10px] mono text-slate-400 mb-1"><span>suite_progress</span><span>100%</span></div>
-                    <div class="h-1.5 rounded-full bg-slate-800 overflow-hidden"><div class="h-full w-full rounded-full bg-gradient-to-r from-cyan-400 to-emerald-400"></div></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="about" class="py-10 scroll-mt-28 reveal">
-        <div class="text-center max-w-3xl mx-auto mb-12">
-          <h2 class="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-2">Career Profile</h2>
-          <p class="text-3xl sm:text-4xl font-extrabold text-white">About Me</p>
-          <div class="h-1 w-16 bg-gradient-to-r from-cyan-400 to-blue-600 mx-auto mt-4 rounded-full"></div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-          <div class="tilt glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
-            <div>
-              <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl mb-6">
-                <i class="fa-solid fa-bullseye"></i>
-              </div>
-              <h3 class="text-xl sm:text-2xl font-bold text-white mb-4">Career Objective</h3>
-              <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-4">
-                To contribute to software quality through automation testing, manual validation, and continuous improvement in real-time project environments while learning and growing with the organization.
-              </p>
-              <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                I have worked on Python-based automation testing for web applications and APIs using <strong>Pytest</strong>, <strong>Robot Framework</strong>, and <strong>Selenium</strong>. My work includes test case design, smoke and regression validation, defect reporting, UI automation, and improving test reliability in live QA workflows.
-              </p>
-            </div>
-            <div class="grid grid-cols-2 gap-4 mt-8 pt-6 border-t border-slate-700/60">
-              <div>
-                <span class="block text-3xl font-black text-cyan-400">200+</span>
-                <span class="text-xs text-slate-400">Test Cases Executed During Internship</span>
-              </div>
-              <div>
-                <span class="block text-xl sm:text-2xl font-black text-blue-400">MCA - 7.8 CGPA</span>
-                <span class="text-xs text-slate-400">Anurag University (2025)</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="tilt glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
-            <div>
-              <div class="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xl mb-6">
-                <i class="fa-solid fa-vial-circle-check"></i>
-              </div>
-              <h3 class="text-xl sm:text-2xl font-bold text-white mb-4">Core QA Capabilities</h3>
-              <div class="space-y-4">
-                <div class="flex items-start space-x-3">
-                  <i class="fa-solid fa-circle-check text-cyan-400 mt-1"></i>
-                  <div>
-                    <p class="font-semibold text-white">Automation Testing</p>
-                    <p class="text-sm text-slate-300">Designed and executed test cases, performed smoke and regression validation, and automated repetitive workflows using Selenium and Robot Framework.</p>
-                  </div>
-                </div>
-                <div class="flex items-start space-x-3">
-                  <i class="fa-solid fa-circle-check text-cyan-400 mt-1"></i>
-                  <div>
-                    <p class="font-semibold text-white">API Validation</p>
-                    <p class="text-sm text-slate-300">REST API testing with schema checks, validation workflows, and response verification.</p>
-                  </div>
-                </div>
-                <div class="flex items-start space-x-3">
-                  <i class="fa-solid fa-circle-check text-cyan-400 mt-1"></i>
-                  <div>
-                    <p class="font-semibold text-white">Security &amp; Auth Testing</p>
-                    <p class="text-sm text-slate-300">JWT token validation, authentication checks, and secure flow analysis.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="experience" class="py-10 scroll-mt-28 reveal">
-        <div class="text-center max-w-3xl mx-auto mb-12">
-          <h2 class="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-2">Professional Journey</h2>
-          <p class="text-3xl sm:text-4xl font-extrabold text-white">Experience</p>
-          <div class="h-1 w-16 bg-gradient-to-r from-cyan-400 to-blue-600 mx-auto mt-4 rounded-full"></div>
-        </div>
-
-        <div class="space-y-6">
-          <div class="glass-card rounded-3xl p-6 sm:p-8">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <div>
-                <div class="tag mb-3">Automation &amp; Manual Testing Intern</div>
-                <h3 class="text-xl sm:text-2xl font-bold text-white">Internship Experience</h3>
-                <p class="mt-2 text-sm font-medium text-cyan-300">Ivtree Technologies</p>
-              </div>
-              <span class="text-sm text-cyan-300 mono">Dec 2025 – May 2026</span>
-            </div>
-            <p class="mt-4 text-slate-300 leading-relaxed">
-              Worked as a testing intern in a live project environment, where I executed functional, smoke, and regression test cases, identified defects, and supported QA processes for better product quality and release confidence.
-            </p>
-            <ul class="mt-5 space-y-2 text-slate-300 text-sm sm:text-base">
-              <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>Executed 200+ manual and validation test cases during the internship to verify application behavior.</li>
-              <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>Tested user flows, validated expected results, and reported bugs with clear defect details.</li>
-              <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>Supported automation testing initiatives by learning and contributing to repetitive QA workflow validation.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section id="skills" class="py-10 scroll-mt-28 reveal">
-        <div class="text-center max-w-3xl mx-auto mb-12">
-          <h2 class="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-2">Toolset</h2>
-          <p class="text-3xl sm:text-4xl font-extrabold text-white">Skills</p>
-          <div class="h-1 w-16 bg-gradient-to-r from-cyan-400 to-blue-600 mx-auto mt-4 rounded-full"></div>
-        </div>
-
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          <div class="glass-card rounded-2xl p-4 text-center hover:-translate-y-1 transition-transform"><i class="fa-brands fa-python text-cyan-400 text-2xl mb-3"></i><p class="font-semibold">Python</p></div>
-          <div class="glass-card rounded-2xl p-4 text-center hover:-translate-y-1 transition-transform"><i class="fa-solid fa-user-check text-cyan-400 text-2xl mb-3"></i><p class="font-semibold">Manual Testing</p></div>
-          <div class="glass-card rounded-2xl p-4 text-center hover:-translate-y-1 transition-transform"><i class="fa-solid fa-window-maximize text-blue-400 text-2xl mb-3"></i><p class="font-semibold">Selenium</p></div>
-          <div class="glass-card rounded-2xl p-4 text-center hover:-translate-y-1 transition-transform"><i class="fa-solid fa-robot text-cyan-400 text-2xl mb-3"></i><p class="font-semibold">Robot Framework</p></div>
-          <div class="glass-card rounded-2xl p-4 text-center hover:-translate-y-1 transition-transform"><i class="fa-solid fa-vial text-purple-400 text-2xl mb-3"></i><p class="font-semibold">Pytest</p></div>
-          <div class="glass-card rounded-2xl p-4 text-center hover:-translate-y-1 transition-transform"><i class="fa-solid fa-code text-emerald-400 text-2xl mb-3"></i><p class="font-semibold">API Testing</p></div>
-          <div class="glass-card rounded-2xl p-4 text-center hover:-translate-y-1 transition-transform"><i class="fa-solid fa-shield-halved text-amber-400 text-2xl mb-3"></i><p class="font-semibold">JWT Security</p></div>
-          <div class="glass-card rounded-2xl p-4 text-center hover:-translate-y-1 transition-transform"><i class="fa-solid fa-bug text-rose-400 text-2xl mb-3"></i><p class="font-semibold">Bug Analysis</p></div>
-        </div>
-      </section>
-
-      <section id="projects" class="py-10 scroll-mt-28 reveal">
-        <div class="text-center max-w-3xl mx-auto mb-12">
-          <h2 class="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-2">Work Highlights</h2>
-          <p class="text-3xl sm:text-4xl font-extrabold text-white">Featured Projects</p>
-          <div class="h-1 w-16 bg-gradient-to-r from-cyan-400 to-blue-600 mx-auto mt-4 rounded-full"></div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <article class="glass-card rounded-3xl p-6">
-            <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl mb-5">
-              <i class="fa-solid fa-house-signal"></i>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-3">Smart Home Automation using Face Recognition</h3>
-            <p class="text-slate-300 leading-relaxed text-sm">
-              MCA project based on smart home automation with webcam face recognition, focused on access control, security automation, and practical implementation of intelligent home-based monitoring using computer vision.
-            </p>
-          </article>
-
-          <article class="glass-card rounded-3xl p-6">
-            <div class="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xl mb-5">
-              <i class="fa-solid fa-plug"></i>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-3">API Validation Framework</h3>
-            <p class="text-slate-300 leading-relaxed text-sm">
-              Built and executed API checks for request/response validation, business rules, and negative-path testing to ensure backend reliability.
-            </p>
-          </article>
-
-          <article class="glass-card rounded-3xl p-6">
-            <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl mb-5">
-              <i class="fa-solid fa-lock"></i>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-3">JWT Auth Security Testing</h3>
-            <p class="text-slate-300 leading-relaxed text-sm">
-              Performed authentication and token validation checks to ensure secure access patterns and detect issues in user session and authorization flow.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section id="education" class="py-10 scroll-mt-28 reveal">
-        <div class="text-center max-w-3xl mx-auto mb-12">
-          <h2 class="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-2">Academic Background</h2>
-          <p class="text-3xl sm:text-4xl font-extrabold text-white">Education & Internship</p>
-          <div class="h-1 w-16 bg-gradient-to-r from-cyan-400 to-blue-600 mx-auto mt-4 rounded-full"></div>
-        </div>
-
-        <div class="space-y-6">
-          <div class="glass-card rounded-3xl p-6 sm:p-8">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <div>
-                <div class="tag mb-3">Master of Computer Applications (MCA)</div>
-                <h3 class="text-xl sm:text-2xl font-bold text-white">Anurag University</h3>
-              </div>
-              <span class="text-sm text-cyan-300 mono">2023 – 2025</span>
-            </div>
-            <p class="mt-4 text-slate-300 text-sm sm:text-base leading-relaxed">
-              Completed MCA with a CGPA of <strong class="text-white">7.8</strong>, strengthening my foundation in software engineering, testing methodologies, and practical application development.
-            </p>
-          </div>
-
-          <div class="glass-card rounded-3xl p-6 sm:p-8">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <div>
-                <div class="tag mb-3">MCA Project Work</div>
-                <h3 class="text-xl sm:text-2xl font-bold text-white">Smart Home Automation using Face Recognition</h3>
-              </div>
-            </div>
-            <p class="mt-4 text-slate-300 text-sm sm:text-base leading-relaxed">
-              Developed a smart home automation project based on face recognition using a webcam. The system focused on identifying authorized users, enabling secure access control, and automating home functions through intelligent recognition and live monitoring.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="glass-card rounded-3xl p-6">
-              <div class="tag mb-3">Degree</div>
-              <h3 class="text-xl font-bold text-white">Bachelor's Degree</h3>
-              <p class="mt-3 text-slate-300 text-sm leading-relaxed">Passed out in 2023.</p>
-            </div>
-
-            <div class="glass-card rounded-3xl p-6">
-              <div class="tag mb-3">Intermediate</div>
-              <h3 class="text-xl font-bold text-white">Intermediate Education</h3>
-              <p class="mt-3 text-slate-300 text-sm leading-relaxed">Passed out in 2020.</p>
-            </div>
-
-            <div class="glass-card rounded-3xl p-6">
-              <div class="tag mb-3">SSC</div>
-              <h3 class="text-xl font-bold text-white">Secondary School Certificate</h3>
-              <p class="mt-3 text-slate-300 text-sm leading-relaxed">Passed out in 2017.</p>
-            </div>
-          </div>
-
-          <div class="glass-card rounded-3xl p-6 sm:p-8">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <div>
-                <div class="tag mb-3">Internship</div>
-                <h3 class="text-xl sm:text-2xl font-bold text-white">Uniclair Live Project Internship</h3>
-              </div>
-              <span class="text-sm text-cyan-300 mono">Live Project Experience</span>
-            </div>
-            <p class="mt-4 text-slate-300 text-sm sm:text-base leading-relaxed">
-              Worked on the Uniclair live project during internship, where I gained hands-on experience in real-time application testing, validation, issue tracking, bug analysis, and software quality improvement in a live development environment.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" class="py-10 scroll-mt-28 reveal">
-        <div class="text-center max-w-3xl mx-auto mb-12">
-          <h2 class="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-2">Get In Touch</h2>
-          <p class="text-3xl sm:text-4xl font-extrabold text-white">Contact Me</p>
-          <div class="h-1 w-16 bg-gradient-to-r from-cyan-400 to-blue-600 mx-auto mt-4 rounded-full"></div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <a href="mailto:isheshank@gmail.com" class="glass-card rounded-3xl p-6 text-center hover:border-cyan-400 transition-colors">
-            <i class="fa-solid fa-envelope text-cyan-400 text-2xl mb-3"></i>
-            <h3 class="font-bold text-lg text-white">Email</h3>
-            <p class="text-slate-300 mt-2 break-all">isheshank@gmail.com</p>
-          </a>
-
-          <a href="tel:+919052349111" class="glass-card rounded-3xl p-6 text-center hover:border-cyan-400 transition-colors">
-            <i class="fa-solid fa-phone text-blue-400 text-2xl mb-3"></i>
-            <h3 class="font-bold text-lg text-white">Phone</h3>
-            <p class="text-slate-300 mt-2">+91 9052349111</p>
-          </a>
-
-          <div class="glass-card rounded-3xl p-6 text-center">
-            <i class="fa-solid fa-location-dot text-emerald-400 text-2xl mb-3"></i>
-            <h3 class="font-bold text-lg text-white">Location</h3>
-            <p class="text-slate-300 mt-2">Hyderabad, India</p>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="relative z-10 max-w-7xl mx-auto px-4 pb-10 text-center text-slate-400 text-sm">
-      © 2025 Ilaveni Sheshank. Built with automation mindset and a passion for quality.
-    </footer>
-
-    <script>
-      const roles = [
-        'Selenium Automation',
-        'Robot Framework',
-        'API Testing',
-        'Pytest Automation',
-        'JWT Security Testing'
-      ];
-
-      const typed = document.getElementById('typed');
-      if (typed) {
-        let roleIndex = 0;
-        let charIndex = 0;
-        let deleting = false;
-
-        function typeLoop() {
-          const currentRole = roles[roleIndex];
-          if (!deleting) {
-            charIndex++;
-            typed.textContent = currentRole.slice(0, charIndex);
-            if (charIndex === currentRole.length) {
-              deleting = true;
-              setTimeout(typeLoop, 1200);
-              return;
-            }
-          } else {
-            charIndex--;
-            typed.textContent = currentRole.slice(0, charIndex);
-            if (charIndex === 0) {
-              deleting = false;
-              roleIndex = (roleIndex + 1) % roles.length;
-            }
-          }
-          setTimeout(typeLoop, deleting ? 60 : 115);
-        }
-        typeLoop();
-      }
-
-      const progress = document.getElementById('progress');
-      const updateProgress = () => {
-        const scrollTop = window.scrollY;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-        if (progress) progress.style.width = percent + '%';
-      };
-      window.addEventListener('scroll', updateProgress, { passive: true });
-      updateProgress();
-
-      const revealItems = document.querySelectorAll('.reveal');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            entry.target.animate(
-              [
-                { opacity: 0, transform: 'translateY(26px) scale(0.98)' },
-                { opacity: 1, transform: 'translateY(0) scale(1)' }
-              ],
-              { duration: 700, easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)', fill: 'forwards' }
-            );
-          }
-        });
-      }, { threshold: 0.12 });
-      revealItems.forEach((item) => observer.observe(item));
-
-      const menuBtn = document.getElementById('mobile-menu-btn');
-      const mobileMenu = document.getElementById('mobile-menu');
-      const menuIcon = document.getElementById('menu-icon');
-      if (menuBtn && mobileMenu) {
-        menuBtn.addEventListener('click', () => {
-          const isOpen = !mobileMenu.classList.contains('hidden');
-          mobileMenu.classList.toggle('hidden', isOpen);
-          menuBtn.setAttribute('aria-expanded', String(!isOpen));
-          menuIcon.classList.toggle('fa-bars', isOpen);
-          menuIcon.classList.toggle('fa-xmark', !isOpen);
-        });
-      }
-
-      document.querySelectorAll('.mobile-link').forEach(link => {
-        link.addEventListener('click', () => {
-          mobileMenu.classList.add('hidden');
-          menuBtn.setAttribute('aria-expanded', 'false');
-          menuIcon.classList.add('fa-bars');
-          menuIcon.classList.remove('fa-xmark');
-        });
-      });
-
-      const navLinks = document.querySelectorAll('.nav-link');
-      const sections = document.querySelectorAll('section[id]');
-      const setActiveLink = () => {
-        const scrollPosition = window.scrollY + 160;
-        sections.forEach(section => {
-          const top = section.offsetTop;
-          const height = section.offsetHeight;
-          const id = section.getAttribute('id');
-          const link = document.querySelector(`.nav-link[href="#${id}"]`);
-          if (!link) return;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            navLinks.forEach(item => item.classList.remove('active'));
-            link.classList.add('active');
-          }
-        });
-      };
-      window.addEventListener('scroll', setActiveLink);
-      setActiveLink();
-
-      document.querySelectorAll('.count').forEach((counter) => {
-        const target = Number(counter.dataset.to || 0);
-        let start = 0;
-        const duration = 1200;
-        const increment = target / (duration / 16);
-        const timer = setInterval(() => {
-          start += increment;
-          if (start >= target) {
-            counter.textContent = target;
-            clearInterval(timer);
-          } else {
-            counter.textContent = Math.floor(start);
-          }
-        }, 16);
-      });
-
-      const canvas = document.getElementById('webgl-canvas');
-      if (canvas && window.THREE) {
-        try {
-          const scene = new THREE.Scene();
-          const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
-          const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-          renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-          renderer.setSize(window.innerWidth, window.innerHeight);
-
-          const ambient = new THREE.AmbientLight(0x8be9fd, 1.4);
-          scene.add(ambient);
-
-          const group = new THREE.Group();
-          const geometry = new THREE.IcosahedronGeometry(1.7, 1);
-          const material = new THREE.MeshStandardMaterial({
-            color: 0x4cc9f0,
-            emissive: 0x10314a,
-            metalness: 0.18,
-            roughness: 0.4,
-            transparent: true,
-            opacity: 0.82
-          });
-          const mesh = new THREE.Mesh(geometry, material);
-          group.add(mesh);
-
-          const wire = new THREE.Mesh(
-            geometry,
-            new THREE.MeshBasicMaterial({ color: 0x8b5cf6, wireframe: true, transparent: true, opacity: 0.18 })
-          );
-          group.add(wire);
-          scene.add(group);
-
-          camera.position.z = 7;
-
-          const animate = () => {
-            requestAnimationFrame(animate);
-            const t = performance.now() * 0.0007;
-            mesh.rotation.x += 0.0025;
-            mesh.rotation.y += 0.0035 + Math.sin(t) * 0.0008;
-            mesh.position.y = Math.sin(t * 2.2) * 0.15;
-            wire.rotation.x -= 0.0021;
-            wire.rotation.y -= 0.0031;
-            group.rotation.z = Math.sin(t * 1.3) * 0.18;
-            renderer.render(scene, camera);
-          };
-          animate();
-
-          window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-          });
-        } catch (error) {
-          document.documentElement.classList.add('no-webgl');
-        }
-      } else {
-        document.documentElement.classList.add('no-webgl');
-      }
-
-      document.querySelectorAll('.tilt').forEach((card) => {
-        card.addEventListener('pointermove', (event) => {
-          if (window.matchMedia('(pointer: coarse)').matches) return;
-          const rect = card.getBoundingClientRect();
-          const x = (event.clientX - rect.left) / rect.width;
-          const y = (event.clientY - rect.top) / rect.height;
-          const rotateY = (x - 0.5) * 14;
-          const rotateX = (0.5 - y) * 14;
-          const glowX = x * 100;
-          const glowY = y * 100;
-
-          card.style.transform = `perspective(1400px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px) scale(1.01)`;
-          card.style.boxShadow = `0 32px 70px rgba(8, 47, 73, 0.45), ${-10 + rotateY * 0.8}px ${12 - rotateX * 0.8}px 40px rgba(34, 211, 238, 0.14), ${glowX / 18}px ${glowY / 18}px 36px rgba(168, 85, 247, 0.18)`;
-        });
-        card.addEventListener('pointerleave', () => {
-          card.style.transform = 'none';
-          card.style.boxShadow = '';
-        });
-      });
-    </script>
-  </body>
-</html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0b">
+<meta name="description" content="Ilaveni Sheshank - QA Automation & Manual Testing Engineer. Python, Robot Framework, Selenium, Pytest, API & JWT testing.">
+<title>Ilaveni Sheshank — QA Automation Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0b; --bg2:#0e0e11; --card:#101014; --line:#1f1f26; --line2:#2a2a33;
+  --text:#fafafa; --muted:#a1a1aa; --dim:#71717a;
+  --blue:#3b82f6; --blue2:#60a5fa; --green:#22c55e; --green2:#4ade80; --purple:#a78bfa;
+  --sans:'Space Grotesk',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;overflow-x:hidden;min-height:100vh;min-height:100dvh;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+ul{list-style:none}
+img{max-width:100%;display:block}
+.mono{font-family:var(--mono)}
+.wrap{width:100%;max-width:1180px;margin:0 auto;padding:0 20px}
+section{scroll-margin-top:70px}
+::selection{background:var(--blue);color:#fff}
+header,main,footer{position:relative;z-index:1}
+
+/* ===== NAV ===== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(10,10,11,.96);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px;gap:10px}
+.logo{font-family:var(--sans);font-weight:700;font-size:19px;letter-spacing:-.3px;white-space:nowrap}
+.logo i{font-style:normal;color:var(--blue);font-weight:500}
+.links{display:none;align-items:center;gap:4px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.links a{padding:6px 8px;transition:color .2s}
+.links a:hover,.links a.active{color:var(--text)}
+.links .sl{color:var(--line2)}
+.right{display:flex;align-items:center;gap:6px}
+.lc{font-weight:500;font-size:14px;padding:8px 6px;color:var(--text);transition:color .2s}
+.lc:hover{color:var(--blue2)}
+.burger{width:40px;height:40px;display:flex;align-items:center;justify-content:center}
+.burger span,.burger span::before,.burger span::after{display:block;width:20px;height:2px;background:var(--text);border-radius:2px;position:relative;transition:.25s}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+.burger.open span{background:transparent}
+.burger.open span::before{top:0;transform:rotate(45deg)}
+.burger.open span::after{top:0;transform:rotate(-45deg)}
+.mobile{display:none;background:var(--bg);border-bottom:1px solid var(--line)}
+.mobile.open{display:block}
+.mobile a{display:flex;justify-content:space-between;padding:15px 20px;border-top:1px solid var(--line);font-weight:500;color:var(--muted)}
+.mobile a:hover{color:var(--text)}
+.mobile a small{font-family:var(--mono);color:var(--blue)}
+#bar{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--blue)}
+@media(min-width:900px){.links{display:flex}.burger{display:none}.mobile{display:none!important}.lc{padding:9px 18px;border:1px solid var(--line2);border-radius:999px;font-size:13px}.lc:hover{border-color:var(--blue)}}
+
+/* ===== COMMON ===== */
+.sec-no{font-family:var(--mono);font-size:13px;color:var(--blue);letter-spacing:.08em;display:block;margin-bottom:10px}
+.sec-t{font-size:clamp(30px,6.5vw,52px);font-weight:600;letter-spacing:-.03em;line-height:1.1}
+.sec-t.grey{color:#8a8a93}
+.pad{padding:80px 0}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border:1px solid var(--line2);border-radius:999px;font-family:var(--mono);font-size:13px;color:var(--text);background:var(--bg2);transition:.2s}
+.pill:hover{border-color:var(--blue);color:var(--blue2)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.55)}70%{box-shadow:0 0 0 9px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 26px;border-radius:14px;font-weight:600;font-size:16px;transition:.2s}
+.btn.blue{background:var(--blue);color:#fff}
+.btn.blue:hover{background:#2563eb;transform:translateY(-2px);box-shadow:0 12px 30px -12px rgba(59,130,246,.7)}
+.btn.line{border:1px solid var(--line2);color:var(--text)}
+.btn.line:hover{border-color:var(--blue);color:var(--blue2)}
+
+/* ===== HERO ===== */
+.hero{padding:110px 0 30px}
+.hero-top{display:grid;gap:30px;align-items:center}
+.status{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.hero h1{font-size:clamp(42px,11vw,92px);font-weight:700;letter-spacing:-.045em;line-height:1;margin:18px 0 14px}
+.hero h1 em{font-style:normal;color:var(--blue)}
+.role{font-family:var(--mono);font-size:clamp(13px,3.6vw,18px);color:var(--muted);margin-bottom:16px}
+.role b{color:var(--text);font-weight:500}
+.caret{display:inline-block;width:2px;height:1.05em;background:var(--blue);margin-left:3px;vertical-align:-.15em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.lead{color:var(--muted);font-size:clamp(16px,4vw,19px);max-width:600px}
+.photo{position:relative;width:132px;height:132px;border-radius:50%;border:1px solid var(--line2);background:linear-gradient(160deg,#16161b,#0c0c0f);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+.photo .in{font-size:44px;font-weight:700;letter-spacing:-.05em;color:var(--blue)}
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 10px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+.stats{margin-top:34px;border-top:1px solid var(--line)}
+.stat{padding:36px 0;text-align:center;border-bottom:1px solid var(--line)}
+.stat b{display:block;font-size:clamp(54px,15vw,84px);font-weight:600;letter-spacing:-.04em;line-height:1}
+.stat b i{font-style:normal;color:var(--blue);font-size:.48em;font-weight:600;margin-left:6px;vertical-align:.5em}
+.stat > span{display:block;margin-top:14px;font-family:var(--mono);font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+@media(min-width:900px){
+  .hero{padding:140px 0 40px}
+  .hero-top{grid-template-columns:1.4fr .6fr}
+  .intro{order:1}
+  .photo-cell{order:2}
+  .photo{width:100%;max-width:330px;height:auto;aspect-ratio:4/5;border-radius:26px;margin-left:auto}
+  .photo .in{font-size:96px}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:50px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stat{border-bottom:0;border-right:1px solid var(--line);padding:46px 0}
+  .stat:last-child{border-right:0}
+}
+
+/* ===== ABOUT ===== */
+.statement{font-size:clamp(26px,6.4vw,58px);font-weight:500;letter-spacing:-.03em;line-height:1.28;margin-top:36px;max-width:1000px}
+.wr .w{opacity:.22;filter:blur(4px);transition:opacity .35s ease,filter .35s ease}
+.wr .w.on{opacity:1;filter:none}
+.statement .hl{color:var(--blue2)}
+.about-p{margin-top:34px;max-width:760px;color:var(--muted);font-size:clamp(16px,4vw,19px)}
+.about-p+.about-p{margin-top:14px}
+.about-p b{color:var(--text);font-weight:600}
+
+/* ===== SKILLS ===== */
+.skills-head{display:flex;flex-direction:column;align-items:center;margin-bottom:46px}
+.sbadge{width:84px;height:84px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(59,130,246,.55);background:radial-gradient(circle,rgba(59,130,246,.2),rgba(10,10,11,.9) 70%);box-shadow:0 0 38px rgba(59,130,246,.35);font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.12em}
+.cats{display:grid;gap:34px;max-width:860px;margin:0 auto}
+.cat{position:relative;padding-left:58px}
+.cat::before{content:"";position:absolute;left:21px;top:46px;bottom:-24px;width:1px;background:var(--line2)}
+.cat:last-child::before{display:none}
+.cat-ico{position:absolute;left:0;top:0;width:44px;height:44px;border-radius:50%;border:1px solid var(--line2);background:var(--bg2);display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.cat-ico svg{width:20px;height:20px}
+.cat h3{font-size:19px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:44px}
+.icons{display:flex;flex-wrap:wrap;gap:18px 14px;margin-top:12px}
+.ic{width:72px;text-align:center}
+.ic .c{width:60px;height:60px;margin:0 auto 8px;border-radius:50%;border:1px solid var(--line2);background:var(--card);display:flex;align-items:center;justify-content:center;transition:.25s;overflow:hidden}
+.ic:hover .c{border-color:var(--blue);box-shadow:0 0 22px rgba(59,130,246,.3);transform:translateY(-3px)}
+.ic img{width:30px;height:30px;object-fit:contain}
+.ic img.inv{filter:invert(1)}
+.ic .fb{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--blue2)}
+.ic span.l{display:block;font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.3;word-break:break-word}
+
+/* ===== PROJECTS ===== */
+.work{margin-top:42px;display:grid;gap:34px}
+.proj{position:relative;border:1px solid var(--line);border-radius:26px;background:var(--card);overflow:hidden;transition:border-color .3s}
+.proj:hover{border-color:rgba(59,130,246,.5)}
+.vis{position:relative;background:linear-gradient(135deg,#0d1b33,#0b0b10 70%);overflow:hidden;display:flex;align-items:center;justify-content:center;padding:24px 22px 8px}
+.vis::after{content:"";position:absolute;left:0;right:0;bottom:0;height:36px;background:linear-gradient(180deg,transparent,var(--card));pointer-events:none}
+.vis::before{content:"";position:absolute;width:320px;height:320px;border-radius:50%;right:-80px;top:-120px;background:radial-gradient(circle,rgba(59,130,246,.35),transparent 65%)}
+.term{position:relative;z-index:1;width:100%;max-width:420px;border:1px solid var(--line2);border-radius:14px;background:rgba(8,8,10,.92);overflow:hidden}
+.term .tb{display:flex;gap:6px;align-items:center;padding:10px 12px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--dim)}
+.term .tb i{width:9px;height:9px;border-radius:50%;background:#2f2f38}
+.term .tb em{font-style:normal;margin-left:8px}
+.term pre{padding:14px;font-family:var(--mono);font-size:12px;line-height:1.7;color:var(--muted);white-space:pre-wrap;word-break:break-word}
+.k{color:var(--purple)}.s{color:#fbbf24}.g{color:var(--green2)}.c{color:var(--blue2)}.d{color:var(--dim)}
+.body{position:relative;z-index:2;padding:22px 24px 28px}
+.badges{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:16px}
+.bd{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.bd.teal{border:1px solid rgba(45,212,191,.5);color:#5eead4;background:rgba(45,212,191,.08)}
+.bd.grey{border:1px solid var(--line2);color:var(--muted);background:var(--bg2)}
+.yr{font-family:var(--mono);font-size:12px;color:var(--dim)}
+.body h3{font-size:clamp(28px,7vw,44px);font-weight:600;letter-spacing:-.03em;line-height:1.1;margin-bottom:14px}
+.body p{color:var(--muted);font-size:16px;margin-bottom:18px}
+.pts li{color:var(--muted);font-size:15px;padding-left:24px;position:relative;margin:9px 0}
+.pts li::before{content:"→";position:absolute;left:0;color:var(--blue)}
+.pts li b{color:var(--text);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{display:inline-block;padding:6px 13px;border:1px solid var(--line2);border-radius:10px;font-family:var(--mono);font-size:12px;color:var(--muted);background:var(--bg2)}
+.cnt{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:.14em;margin-bottom:12px;display:block}
+.cnt b{color:var(--blue);font-weight:500}
+@media(min-width:900px){
+  .proj{display:grid;grid-template-columns:1.05fr .95fr;min-height:420px}
+  .proj:nth-child(even) .vis{order:2}
+  .vis{padding:34px}
+  .vis::after{left:auto;top:0;bottom:0;width:70px;height:auto;right:0;background:linear-gradient(90deg,transparent,var(--card))}
+  .proj:nth-child(even) .vis::after{right:auto;left:0;background:linear-gradient(270deg,transparent,var(--card))}
+  .body{margin-top:0;padding:44px 40px;align-self:center}
+  .proj:nth-child(even) .body{order:1}
+}
+
+/* ===== EXPERIENCE ===== */
+.xp{margin-top:42px;display:grid;gap:26px;max-width:900px}
+.xcard{position:relative;border:1px solid var(--line);border-radius:26px;background:var(--card);overflow:hidden;transition:border-color .3s}
+.xcard:hover{border-color:rgba(59,130,246,.45)}
+.xtop{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--line);position:relative}
+.wd{display:flex;gap:7px}
+.wd i{width:10px;height:10px;border-radius:50%;background:#2c2c34}
+.xcard.act .wd i:first-child{background:var(--green)}
+.dp{font-family:var(--mono);font-size:13px;padding:6px 16px;border-radius:999px}
+.dp.g{color:var(--green2);background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3)}
+.dp.b{color:var(--blue2);background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.35)}
+.wm{position:absolute;right:14px;top:-4px;font-size:64px;font-weight:700;letter-spacing:-.04em;color:rgba(255,255,255,.035);pointer-events:none;line-height:1;user-select:none;z-index:0}
+.xtop .dp,.xtop .wd{position:relative;z-index:1}
+.xbody{padding:26px 24px 28px}
+.xtag{display:flex;align-items:center;gap:12px;margin-bottom:16px;font-family:var(--mono);font-size:13px;color:var(--dim)}
+.tg{padding:5px 12px;border-radius:999px;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.tg.p{color:var(--purple);background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.35)}
+.tg.b{color:var(--blue2);background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.35)}
+.tg.g{color:var(--green2);background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.35);display:inline-flex;align-items:center;gap:8px}
+.xbody h3{font-size:clamp(24px,5.6vw,32px);font-weight:600;letter-spacing:-.02em;line-height:1.2}
+.xbody h3.gr{color:var(--green2)}
+.org{font-size:19px;font-weight:500;margin:6px 0 4px;color:var(--blue2)}
+.org.gr{color:var(--green2)}
+.loc{display:flex;align-items:center;gap:7px;color:var(--dim);font-size:15px}
+.loc svg{width:14px;height:14px}
+.impact{margin:22px 0;padding:16px 18px;border:1px solid rgba(34,197,94,.25);border-radius:14px;background:rgba(34,197,94,.05)}
+.impact small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
+.impact b{font-size:24px;font-weight:600;color:var(--green2);letter-spacing:-.01em}
+.xl li{color:var(--muted);font-size:15px;padding-left:26px;position:relative;margin:11px 0}
+.xl li::before{content:"→";position:absolute;left:0;color:var(--blue)}
+.xl li b{color:var(--text);font-weight:600}
+.stk{margin-top:20px;font-family:var(--mono);font-size:12px;color:var(--dim);margin-bottom:10px}
+.earlier{margin-top:6px;font-family:var(--mono);font-size:13px;color:var(--dim);line-height:1.8}
+.earlier b{color:var(--muted);font-weight:500}
+
+/* ===== CONTACT ===== */
+.contact-grid{display:grid;gap:32px;margin-top:36px;max-width:1000px}
+.rows{display:grid;gap:12px}
+.row{display:flex;gap:14px;align-items:center;padding:16px 18px;border:1px solid var(--line);border-radius:16px;background:var(--card);transition:border-color .25s}
+a.row:hover{border-color:var(--blue)}
+.ico{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(59,130,246,.12);color:var(--blue2);flex:none}
+.ico svg{width:20px;height:20px}
+.row small{display:block;font-family:var(--mono);font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.12em}
+.row span{font-size:16px;word-break:break-all}
+form{display:grid;gap:18px}
+label{font-family:var(--mono);font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;display:block;margin-bottom:8px}
+input,textarea{width:100%;padding:16px 18px;border-radius:14px;border:1px solid var(--line);background:#0d0d10;color:var(--text);font:inherit;font-size:16px;outline:none;transition:border-color .2s}
+input::placeholder,textarea::placeholder{color:#5b5b64}
+input:focus,textarea:focus{border-color:var(--blue)}
+textarea{min-height:170px;resize:vertical}
+form .btn{width:100%;padding:18px;font-size:18px;border-radius:16px}
+.btn svg{width:20px;height:20px}
+@media(min-width:900px){.contact-grid{grid-template-columns:.8fr 1.2fr}}
+
+/* ===== MARQUEE ===== */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);overflow:hidden;white-space:nowrap;margin-top:50px}
+.mq{display:inline-flex;animation:mq 30s linear infinite;padding:20px 0}
+.mq span{font-size:14px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding:0 24px;display:inline-flex;align-items:center;gap:24px}
+.mq span::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--blue)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ===== FOOTER ===== */
+footer{background:var(--bg)}
+.foot{display:grid;gap:40px;padding:56px 0 34px}
+.foot .logo{font-size:30px}
+.foot p{color:var(--muted);font-size:18px;max-width:420px;margin:16px 0 22px}
+.meta{display:grid;gap:8px;font-family:var(--mono);font-size:14px;color:var(--muted)}
+.meta .av{color:var(--green2);display:flex;align-items:center;gap:8px}
+.meta div{display:flex;align-items:center;gap:8px}
+.meta svg{width:15px;height:15px}
+.foot h5{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:20px}
+.sm li{margin:0}
+.sm a{display:block;padding:12px 0 12px 30px;font-size:18px;color:var(--text);transition:color .2s}
+.sm a:hover{color:var(--blue2)}
+.chips2{display:flex;flex-wrap:wrap;gap:10px}
+.sc{display:inline-flex;align-items:center;gap:9px;padding:11px 16px;border:1px solid var(--line);border-radius:12px;font-family:var(--mono);font-size:13px;color:var(--muted);background:var(--bg2);transition:.2s}
+.sc:hover{border-color:var(--blue);color:var(--text)}
+.sc svg{width:18px;height:18px}
+.start{display:inline-flex;align-items:center;gap:10px;margin-top:26px;padding:15px 24px;border:1px solid rgba(59,130,246,.45);border-radius:12px;background:rgba(59,130,246,.08);color:var(--blue2);font-family:var(--mono);font-size:15px;font-weight:700;transition:.2s}
+.start:hover{background:rgba(59,130,246,.18)}
+.copy{border-top:1px solid var(--line);padding:24px 0 40px;display:flex;flex-direction:column;align-items:center;gap:18px;font-family:var(--mono);font-size:13px;color:var(--dim);text-align:center}
+.copy .hrt{color:#ef4444}
+.top{display:inline-flex;align-items:center;gap:10px;padding:12px 24px;border:1px solid var(--line2);border-radius:999px;color:var(--muted);transition:.2s}
+.top:hover{border-color:var(--blue);color:var(--text)}
+@media(min-width:900px){.foot{grid-template-columns:1.3fr .7fr 1fr}.copy{flex-direction:row;justify-content:space-between}}
+
+/* reveal on big desktop only; phones always visible */
+@media(hover:hover) and (pointer:fine) and (min-width:900px){
+  .js .rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+  .js .rv.in{op
