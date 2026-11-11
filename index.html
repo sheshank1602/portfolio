@@ -41,37 +41,66 @@
         z-index: 0;
         pointer-events: none;
         background:
-          radial-gradient(900px 600px at 85% 8%, rgba(34,211,238,.14), transparent 60%),
-          radial-gradient(800px 600px at 5% 45%, rgba(168,85,247,.13), transparent 60%),
-          radial-gradient(900px 700px at 80% 90%, rgba(59,130,246,.12), transparent 60%);
+          radial-gradient(900px 600px at 85% 8%, rgba(34,211,238,.18), transparent 60%),
+          radial-gradient(800px 600px at 5% 45%, rgba(168,85,247,.16), transparent 60%),
+          radial-gradient(900px 700px at 80% 90%, rgba(59,130,246,.14), transparent 60%);
+      }
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(148,163,184,0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(148,163,184,0.05) 1px, transparent 1px);
+        background-size: 28px 28px;
+        mask-image: radial-gradient(circle at center, black 45%, transparent 100%);
       }
       img, svg, canvas { max-width: 100%; }
       .mono { font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace; }
 
       .glass-panel {
-        background: rgba(10, 15, 30, 0.94);
+        background: rgba(10, 15, 30, 0.82);
         border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 18px 48px rgba(15, 23, 42, 0.62), inset 0 1px 0 rgba(255,255,255,0.06);
       }
       .glass-card {
-        background: linear-gradient(145deg, rgba(30,41,59,.9), rgba(15,23,42,.88));
-        border: 1px solid rgba(255, 255, 255, 0.09);
-        transition: border-color .3s ease, box-shadow .3s ease;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(145deg, rgba(22,29,44,.92), rgba(15,23,42,.88));
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 22px 52px rgba(2,6,23,0.45), inset 0 1px 0 rgba(255,255,255,0.05);
+        transform-style: preserve-3d;
+        transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+      }
+      .glass-card::before {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        background: linear-gradient(120deg, rgba(34,211,238,.18), transparent 32%, transparent 68%, rgba(168,85,247,.18));
+        opacity: 0;
+        transition: opacity .35s ease;
+        pointer-events: none;
       }
       @media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
         .glass-panel {
-          background: rgba(10, 15, 30, 0.78);
+          background: rgba(10, 15, 30, 0.72);
           -webkit-backdrop-filter: blur(18px);
           backdrop-filter: blur(18px);
         }
         .glass-card {
-          background: linear-gradient(145deg, rgba(30,41,59,.62), rgba(15,23,42,.45));
-          -webkit-backdrop-filter: blur(14px);
-          backdrop-filter: blur(14px);
+          background: linear-gradient(145deg, rgba(20,30,42,.68), rgba(15,23,42,.52));
+          -webkit-backdrop-filter: blur(16px);
+          backdrop-filter: blur(16px);
         }
       }
       .glass-card:hover {
         border-color: rgba(34, 211, 238, 0.55);
-        box-shadow: 0 0 35px rgba(34, 211, 238, 0.18), 0 20px 50px -20px rgba(0,0,0,.7);
+        box-shadow: 0 0 35px rgba(34, 211, 238, 0.18), 0 28px 65px -25px rgba(0,0,0,.88);
+      }
+      .glass-card:hover::before {
+        opacity: 1;
       }
       #webgl-canvas {
         position: fixed;
@@ -96,8 +125,12 @@
       .tilt { transform-origin: center; }
 
       @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+      @keyframes drift { 0%,100% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(12px,-18px,0) scale(1.08); } }
+      @keyframes pulseGlow { 0%,100% { box-shadow: 0 0 0 rgba(34,211,238,0), 0 0 0 rgba(168,85,247,0); } 50% { box-shadow: 0 0 30px rgba(34,211,238,.28), 0 0 40px rgba(168,85,247,.18); } }
       @media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
         .floaty { animation: floaty 6s ease-in-out infinite; }
+        .orb-one, .orb-two { animation: drift 10s ease-in-out infinite; }
+        .hero-panel { animation: pulseGlow 6s ease-in-out infinite; }
       }
 
       @keyframes shine { to { background-position: 200% center; } }
@@ -117,7 +150,26 @@
       .tag { display:inline-block; padding:2px 10px; border-radius:9999px; font-size:11px; font-weight:600;
         background:rgba(6,182,212,.12); color:#22d3ee; border:1px solid rgba(6,182,212,.3); }
 
-      .nav-link.active { color: #22d3ee; }
+      .nav-link.active { color: #22d3ee; text-shadow: 0 0 18px rgba(34,211,238,.7); }
+      .nav-link {
+        position: relative;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -8px;
+        height: 2px;
+        border-radius: 9999px;
+        background: linear-gradient(90deg, rgba(34,211,238,0.8), rgba(168,85,247,0.8));
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform .25s ease;
+      }
+      .nav-link:hover::after, .nav-link.active::after {
+        transform: scaleX(1);
+      }
 
       .cube-wrap { display: none; height: 190px; align-items: center; justify-content: center; perspective: 700px; margin-bottom: 14px; }
       .no-webgl .cube-wrap { display: flex; }
@@ -147,6 +199,8 @@
   <body class="relative text-slate-100 antialiased">
     <div id="progress"></div>
     <canvas id="webgl-canvas" aria-hidden="true"></canvas>
+    <div class="orb-one pointer-events-none absolute left-[8%] top-[20%] hidden md:block w-64 h-64 rounded-full bg-cyan-500/10 blur-3xl"></div>
+    <div class="orb-two pointer-events-none absolute right-[10%] top-[32%] hidden md:block w-72 h-72 rounded-full bg-violet-500/10 blur-3xl"></div>
 
     <header class="fixed top-0 left-0 right-0 z-50 px-3 py-3 sm:px-8">
       <nav class="max-w-7xl mx-auto glass-panel rounded-2xl px-4 sm:px-6 py-3 flex justify-between items-center shadow-2xl" aria-label="Main">
@@ -188,7 +242,7 @@
           <div class="lg:col-span-7 space-y-6 text-left min-w-0">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-cyan-400 text-xs sm:text-sm font-semibold tracking-wide">
               <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-              AUTOMATION &amp; MANUAL QA TESTING SPECIALIST
+              AUTOMATION &amp; MANUAL TESTING INTERN
             </div>
 
             <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.05]">
@@ -200,7 +254,7 @@
             </p>
 
             <p class="text-slate-300 text-base sm:text-lg max-w-2xl leading-relaxed">
-              Software Testing Engineer with hands-on expertise in Python-based automation, Robot Framework, Selenium WebDriver, Pytest, REST API verification, and JWT security authentication.
+              Automation and Manual Testing Intern with hands-on experience in functional testing, regression validation, defect tracking, test case execution, and live QA workflow support. During the internship, I executed 200+ test cases covering smoke, regression, and functional validation.
             </p>
 
             <div class="flex flex-wrap gap-3 pt-2">
@@ -234,7 +288,7 @@
                   <div class="ring r1"></div><div class="ring r2"></div>
                 </div>
               </div>
-              <div class="tilt glass-card rounded-3xl p-6 relative overflow-hidden shadow-2xl" style="border-color: rgba(34,211,238,.25);">
+              <div class="tilt glass-card rounded-3xl p-6 relative overflow-hidden shadow-[0_30px_80px_rgba(14,116,144,0.22)] hero-panel" style="border-color: rgba(34,211,238,.25);">
                 <div class="space-y-4">
                   <div class="flex justify-between items-center border-b border-slate-700/60 pb-3">
                     <span class="text-xs mono text-cyan-400 font-bold">TEST_SUITE_ENGINE</span>
@@ -277,16 +331,16 @@
               </div>
               <h3 class="text-xl sm:text-2xl font-bold text-white mb-4">Career Objective</h3>
               <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-4">
-                To seek a challenging position that provides continuous learning opportunities and allows me to contribute to the growth of the organization.
+                To contribute to software quality through automation testing, manual validation, and continuous improvement in real-time project environments while learning and growing with the organization.
               </p>
               <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                I have worked on Python-based automation to validate web applications and APIs using <strong>Pytest</strong> for UI and backend validation, and with <strong>Robot Framework</strong> and <strong>Selenium</strong>, focusing on improving test reliability, identifying issues early, and maintaining clean and reusable test suites.
+                I have worked on Python-based automation testing for web applications and APIs using <strong>Pytest</strong>, <strong>Robot Framework</strong>, and <strong>Selenium</strong>. My work includes test case design, smoke and regression validation, defect reporting, UI automation, and improving test reliability in live QA workflows.
               </p>
             </div>
             <div class="grid grid-cols-2 gap-4 mt-8 pt-6 border-t border-slate-700/60">
               <div>
-                <span class="block text-3xl font-black text-cyan-400"><span class="count" data-to="200">200</span>+</span>
-                <span class="text-xs text-slate-400">Test Cases Designed &amp; Executed</span>
+                <span class="block text-3xl font-black text-cyan-400">200+</span>
+                <span class="text-xs text-slate-400">Test Cases Executed During Internship</span>
               </div>
               <div>
                 <span class="block text-xl sm:text-2xl font-black text-blue-400">MCA - 7.8 CGPA</span>
@@ -306,7 +360,7 @@
                   <i class="fa-solid fa-circle-check text-cyan-400 mt-1"></i>
                   <div>
                     <p class="font-semibold text-white">Automation Testing</p>
-                    <p class="text-sm text-slate-300">Framework-based UI automation using Selenium and Robot Framework.</p>
+                    <p class="text-sm text-slate-300">Designed and executed test cases, performed smoke and regression validation, and automated repetitive workflows using Selenium and Robot Framework.</p>
                   </div>
                 </div>
                 <div class="flex items-start space-x-3">
@@ -340,19 +394,19 @@
           <div class="glass-card rounded-3xl p-6 sm:p-8">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <div>
-                <div class="tag mb-3">QA Automation Engineer</div>
-                <h3 class="text-xl sm:text-2xl font-bold text-white">Software Testing Engineer</h3>
+                <div class="tag mb-3">Automation &amp; Manual Testing Intern</div>
+                <h3 class="text-xl sm:text-2xl font-bold text-white">Internship Experience</h3>
                 <p class="mt-2 text-sm font-medium text-cyan-300">Ivtree Technologies</p>
               </div>
-              <span class="text-sm text-cyan-300 mono">2023 – Present</span>
+              <span class="text-sm text-cyan-300 mono">Dec 2025 – May 2026</span>
             </div>
             <p class="mt-4 text-slate-300 leading-relaxed">
-              Worked on end-to-end QA validation for web applications and APIs, built reusable automation scripts, executed regression and smoke suites, and improved release confidence by identifying quality gaps early in the development cycle.
+              Worked as a testing intern in a live project environment, where I executed functional, smoke, and regression test cases, identified defects, and supported QA processes for better product quality and release confidence.
             </p>
             <ul class="mt-5 space-y-2 text-slate-300 text-sm sm:text-base">
-              <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>Built and maintained Python-based automation for functional and regression testing</li>
-              <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>Created reusable Robot Framework and Selenium test flows to reduce manual effort</li>
-              <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>Validated REST APIs, JWT token behavior, and authentication scenarios</li>
+              <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>Executed 200+ manual and validation test cases during the internship to verify application behavior.</li>
+              <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>Tested user flows, validated expected results, and reported bugs with clear defect details.</li>
+              <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>Supported automation testing initiatives by learning and contributing to repetitive QA workflow validation.</li>
             </ul>
           </div>
         </div>
@@ -387,11 +441,11 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <article class="glass-card rounded-3xl p-6">
             <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl mb-5">
-              <i class="fa-solid fa-magnifying-glass"></i>
+              <i class="fa-solid fa-house-signal"></i>
             </div>
-            <h3 class="text-xl font-bold text-white mb-3">Web App Regression Suite</h3>
+            <h3 class="text-xl font-bold text-white mb-3">Smart Home Automation using Face Recognition</h3>
             <p class="text-slate-300 leading-relaxed text-sm">
-              Automated end-to-end validation of major user journeys using Selenium and Robot Framework to improve release stability and reduce manual testing effort.
+              MCA project based on smart home automation with webcam face recognition, focused on access control, security automation, and practical implementation of intelligent home-based monitoring using computer vision.
             </p>
           </article>
 
@@ -435,6 +489,18 @@
             </div>
             <p class="mt-4 text-slate-300 text-sm sm:text-base leading-relaxed">
               Completed MCA with a CGPA of <strong class="text-white">7.8</strong>, strengthening my foundation in software engineering, testing methodologies, and practical application development.
+            </p>
+          </div>
+
+          <div class="glass-card rounded-3xl p-6 sm:p-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div>
+                <div class="tag mb-3">MCA Project Work</div>
+                <h3 class="text-xl sm:text-2xl font-bold text-white">Smart Home Automation using Face Recognition</h3>
+              </div>
+            </div>
+            <p class="mt-4 text-slate-300 text-sm sm:text-base leading-relaxed">
+              Developed a smart home automation project based on face recognition using a webcam. The system focused on identifying authorized users, enabling secure access control, and automating home functions through intelligent recognition and live monitoring.
             </p>
           </div>
 
@@ -559,6 +625,13 @@
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
+            entry.target.animate(
+              [
+                { opacity: 0, transform: 'translateY(26px) scale(0.98)' },
+                { opacity: 1, transform: 'translateY(0) scale(1)' }
+              ],
+              { duration: 700, easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)', fill: 'forwards' }
+            );
           }
         });
       }, { threshold: 0.12 });
@@ -657,10 +730,13 @@
 
           const animate = () => {
             requestAnimationFrame(animate);
+            const t = performance.now() * 0.0007;
             mesh.rotation.x += 0.0025;
-            mesh.rotation.y += 0.0035;
+            mesh.rotation.y += 0.0035 + Math.sin(t) * 0.0008;
+            mesh.position.y = Math.sin(t * 2.2) * 0.15;
             wire.rotation.x -= 0.0021;
             wire.rotation.y -= 0.0031;
+            group.rotation.z = Math.sin(t * 1.3) * 0.18;
             renderer.render(scene, camera);
           };
           animate();
@@ -683,12 +759,17 @@
           const rect = card.getBoundingClientRect();
           const x = (event.clientX - rect.left) / rect.width;
           const y = (event.clientY - rect.top) / rect.height;
-          const rotateY = (x - 0.5) * 9;
-          const rotateX = (0.5 - y) * 9;
-          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-2px)`;
+          const rotateY = (x - 0.5) * 14;
+          const rotateX = (0.5 - y) * 14;
+          const glowX = x * 100;
+          const glowY = y * 100;
+
+          card.style.transform = `perspective(1400px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px) scale(1.01)`;
+          card.style.boxShadow = `0 32px 70px rgba(8, 47, 73, 0.45), ${-10 + rotateY * 0.8}px ${12 - rotateX * 0.8}px 40px rgba(34, 211, 238, 0.14), ${glowX / 18}px ${glowY / 18}px 36px rgba(168, 85, 247, 0.18)`;
         });
         card.addEventListener('pointerleave', () => {
           card.style.transform = 'none';
+          card.style.boxShadow = '';
         });
       });
     </script>
